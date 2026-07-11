@@ -5,19 +5,195 @@
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Donate cho GH ALASI</title>
     <style>
-        body { font-family: Arial, sans-serif; text-align: center; padding: 50px; background-color: #f9f9f9; }
-        .card { background: white; padding: 30px; border-radius: 10px; box-shadow: 0 4px 8px rgba(0,0,0,0.1); display: inline-block; }
-        img { max-width: 100%; height: auto; border: 1px solid #eee; border-radius: 5px; }
-        h2 { color: #333; }
-        p { color: #666; font-size: 16px; }
+        * { box-sizing: border-box; margin: 0; padding: 0; }
+        
+        body {
+            font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+            /* [CHỈNH SỬA: Màu nền tối mặc định nếu ảnh bị lỗi] */
+            background-color: #0b0c10;
+            /* [CHỈNH SỬA: Thả URL ảnh nền trực tiếp (direct link) của ảnh vào đây] */
+            background-image: url('https://i.postimg.cc/KYHVPVTd/GH-ALASI-(background).png');
+            background-size: cover;
+            background-position: center;
+            background-attachment: fixed;
+            color: #E2E8F0;
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            min-height: 100vh;
+            padding: 20px;
+        }
+
+        .glass-container {
+            /* [CHỈNH SỬA: Độ mờ nền và màu của khung Glassmorphism] */
+            background: rgba(18, 22, 28, 0.75);
+            backdrop-filter: blur(16px);
+            -webkit-backdrop-filter: blur(16px);
+            /* [CHỈNH SỬA: Viền khung sự kết hợp màu xanh lục Cyberpunk] */
+            border: 1px solid rgba(0, 255, 136, 0.3);
+            border-radius: 20px;
+            padding: 40px 30px;
+            max-width: 850px;
+            width: 100%;
+            display: flex;
+            flex-wrap: wrap;
+            gap: 40px;
+            /* [CHỈNH SỬA: Hiệu ứng bóng đổ pha trộn Cam và Xanh] */
+            box-shadow: 0 0 30px rgba(255, 94, 0, 0.15), 0 0 30px rgba(0, 255, 136, 0.15);
+        }
+
+        .section {
+            flex: 1;
+            min-width: 280px;
+            text-align: center;
+            display: flex;
+            flex-direction: column;
+            justify-content: center;
+        }
+
+        .divider {
+            width: 2px;
+            /* [CHỈNH SỬA: Đường phân cách giữa 2 bên, chuyển màu từ Cam sang Xanh] */
+            background: linear-gradient(to bottom, transparent, #FF5E00, #00FF88, transparent);
+            margin: 0 10px;
+        }
+
+        h2 {
+            /* [CHỈNH SỬA: Chữ nửa Cam nửa Xanh Lá (Cyberpunk Gradient) cho Tiêu đề chính] */
+            background: linear-gradient(90deg, #FF5E00 0%, #00FF88 100%);
+            -webkit-background-clip: text;
+            -webkit-text-fill-color: transparent;
+            margin-bottom: 15px;
+            font-size: 24px;
+            font-weight: 800;
+            text-transform: uppercase;
+            letter-spacing: 2px;
+            /* Hiệu ứng phát sáng nhẹ cho chữ gradient */
+            filter: drop-shadow(0 0 8px rgba(255, 94, 0, 0.4));
+        }
+
+        p { 
+            margin-bottom: 25px; 
+            font-size: 15px; 
+            line-height: 1.6; 
+            /* [CHỈNH SỬA: Màu của text phụ (mô tả, hướng dẫn)] */
+            color: #CBD5E1;
+        }
+
+        .qr-wrapper img {
+            max-width: 100%;
+            width: 250px;
+            border-radius: 12px;
+            /* [CHỈNH SỬA: Viền màu Cam và bóng phát sáng màu Xanh cho QR Code] */
+            border: 2px solid #FF5E00;
+            box-shadow: 0 0 20px rgba(0, 255, 136, 0.3);
+            transition: transform 0.3s ease, box-shadow 0.3s ease, border-color 0.3s ease;
+        }
+
+        .qr-wrapper img:hover { 
+            transform: scale(1.04); 
+            /* [CHỈNH SỬA: Hiệu ứng khi di chuột vào QR Code] */
+            border-color: #00FF88;
+            box-shadow: 0 0 30px rgba(255, 94, 0, 0.6);
+        }
+
+        .info-list {
+            list-style: none;
+            text-align: left;
+            margin-top: 10px;
+        }
+
+        .info-list li {
+            margin-bottom: 15px;
+            /* [CHỈNH SỬA: Màu nền của từng khối thông tin mạng xã hội] */
+            background: rgba(11, 12, 16, 0.8);
+            padding: 15px;
+            border-radius: 10px;
+            /* [CHỈNH SỬA: Viền bên trái của khối thông tin (Mặc định: Xanh lá)] */
+            border-left: 4px solid #00FF88;
+            transition: transform 0.2s ease, border-color 0.2s ease, box-shadow 0.2s ease;
+        }
+        
+        .info-list li:hover {
+            transform: translateX(6px);
+            /* [CHỈNH SỬA: Đổi màu viền trái sang Cam khi di chuột vào khối] */
+            border-left-color: #FF5E00;
+            background: rgba(20, 25, 33, 0.9);
+            box-shadow: -5px 0 15px rgba(255, 94, 0, 0.2);
+        }
+
+        .info-list a {
+            /* [CHỈNH SỬA: Màu của các đường link (YouTube, FB, Email)] */
+            color: #00FF88;
+            text-decoration: none;
+            font-weight: bold;
+            font-size: 14px;
+            transition: color 0.3s, text-shadow 0.3s;
+            word-break: break-all;
+        }
+
+        .info-list a:hover { 
+            /* [CHỈNH SỬA: Màu link khi di chuột vào] */
+            color: #FF5E00; 
+            text-shadow: 0 0 8px rgba(255, 94, 0, 0.6);
+        }
+        
+        .icon {
+            display: block;
+            font-size: 12px;
+            /* [CHỈNH SỬA: Màu tiêu đề nhỏ của từng link (Ví dụ: YOUTUBE, FANPAGE)] */
+            color: #94A3B8;
+            margin-bottom: 4px;
+            text-transform: uppercase;
+            letter-spacing: 1px;
+            font-weight: 600;
+        }
+
+        @media (max-width: 768px) {
+            .divider { display: none; }
+            .glass-container { 
+                padding: 30px 20px; 
+                gap: 30px;
+            }
+        }
     </style>
 </head>
 <body>
-    <div class="card">
-        <h2>Donate ủng hộ GH ALASI</h2>
-        <p>Quét mã QR dưới đây để chuyển khoản qua Ngân hàng MB</p>
-        <!-- Đường link ảnh QR paste ở đây -->
-        <img src="https://img.vietqr.io/image/MB-204016928-compact.png?addInfo=Donate%20cho%20GH%20ALASI" alt="QR Code Donate">
+    <div class="glass-container">
+        <div class="section">
+            <h2>💸 Donate \(^_^)</h2>
+            
+            <p>📲 Quét mã QR dưới đây để donate vào account MB Bank của GH ALASI. Cảm ơn vì đã luôn dõi theo và ủng hộ! 🧡</p>
+            
+            <div class="qr-wrapper">
+                <img src="https://img.vietqr.io/image/MB-204016928-qr_only.png?addInfo=Donate%20cho%20GH%20ALASI" alt="QR Code Donate">
+            </div>
+        </div>
+
+        <div class="divider"></div>
+
+        <div class="section">
+            <h2>ℹ️ Info 🌐</h2>
+            
+            <p>(^-^)/ Kết nối và theo dõi các cập nhật mới nhất của GH ALASI tại đây:</p>
+            
+            <ul class="info-list">
+                <li>
+                    <span class="icon">🎥 YouTube 🔴</span>
+                    <a href="https://youtube.com/@GH_ALASI" target="_blank">youtube.com/@GH_ALASI</a>
+                </li>
+                
+                <li>
+                    <span class="icon">📘 Fanpage 🔵</span>
+                    <a href="https://facebook.com/GH0ALASI" target="_blank">facebook.com/GH0ALASI</a>
+                </li>
+                
+                <li>
+                    <span class="icon">📨 Email ✅️</span>
+                    <a href="mailto:giahuyalasi@gmail.com">giahuyalasi@gmail.com</a>
+                </li>
+            </ul>
+        </div>
     </div>
 </body>
 </html>
